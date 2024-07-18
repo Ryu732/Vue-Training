@@ -3,21 +3,47 @@
   <head>
     <meta charset="utf-8">
     <title>Vue.js のサンプル</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
     <script src="https://unpkg.com/vue@3.0.0/dist/vue.global.js"></script>
   </head>
   <body>
-    <h1>Vue3</h1>
-    <div id="app">
-      {{ message }}
+	<style>
+		.red{
+			font-size: 24pt;
+			color: red;
+			font-weight: plain;
+		}
+		.blue{
+			font-size: 24pt;
+			color: blue;
+		}
+	</style>
+    <h1 class="bg-primary text-white display-4 px-3">Vue3</h1>
+    <div id="app" class="bg-secondary text-white display-4 px-3 container">
+    	<p v-if="isBlue" class="blue">
+			{{ message }}
+		</p>
+		<p v-else class="red">
+			少々お待ちください
+		</p>
     </div>
     <script>
       const appdata = {
         data() {
           return {
-            message: "Hello Vue"
+            message: null,
+			isRed : true,
+			isBlue: false
           }
-        }
+        },
+		mounted(){
+			this.message = 'This is sample page.'
+			setInterval(() =>{
+				this.isBlue = !this.isBlue
+			}, 500)
+	  	}
       }
+	  
 
       Vue.createApp(appdata).mount('#app')
     </script>
